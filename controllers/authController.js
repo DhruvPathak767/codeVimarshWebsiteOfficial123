@@ -67,7 +67,7 @@ const authController = {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
         await user.save();
-        console.log(err);
+        console.error("Email Send Error:", err);
         return res.status(500).render("auth/forgot-password", {
           pageTitle: "Forgot Password - Code Vimarsh",
           currentPage: "forgot-password",
@@ -77,8 +77,13 @@ const authController = {
       }
 
     } catch (err) {
-      console.log(err);
-      res.status(500).redirect("/auth/forgot-password");
+      console.error("Forgot Password Error:", err);
+      return res.status(500).render("auth/forgot-password", {
+        pageTitle: "Forgot Password - Code Vimarsh",
+        currentPage: "forgot-password",
+        errorMessage: "An error occurred. Please try again later.",
+        successMessage: null
+      });
     }
   },
 
@@ -111,8 +116,13 @@ const authController = {
       });
 
     } catch (err) {
-      console.log(err);
-      res.redirect("/auth/forgot-password");
+      console.error("Get Reset Password Error:", err);
+      return res.render("auth/forgot-password", {
+        pageTitle: "Forgot Password - Code Vimarsh",
+        currentPage: "forgot-password",
+        errorMessage: "An error occurred. Please try requesting a new reset link.",
+        successMessage: null
+      });
     }
   },
 
@@ -141,8 +151,13 @@ const authController = {
       res.redirect("/signin");
 
     } catch (err) {
-      console.log(err);
-      res.redirect("/auth/forgot-password");
+      console.error("Post Reset Password Error:", err);
+      return res.render("auth/forgot-password", {
+        pageTitle: "Forgot Password - Code Vimarsh",
+        currentPage: "forgot-password",
+        errorMessage: "An error occurred while resetting your password. Please try again.",
+        successMessage: null
+      });
     }
   }
 };
