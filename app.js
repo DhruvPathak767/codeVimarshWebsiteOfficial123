@@ -1,63 +1,122 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-dotenv.config()
-const app = express()
-import session from 'express-session';
-import connectMongoDBSession from 'connect-mongodb-session';
-const MongoDBStore = connectMongoDBSession(session);
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import session from "express-session";
+import MongoDBStore from "connect-mongodb-session";
+import path from "path";
+import { fileURLToPath } from "url";
 
-import appRouter from './routes/appRouter.js'
-import adminRouter from './routes/adminRouter.js';
-import authRouter from './routes/authRouter.js';
-import User from './models/User.model.js';
+import appRouter from "./routes/appRouter.js";
+import adminRouter from "./routes/adminRouter.js";
+import authRouter from "./routes/authRouter.js";
+import User from "./models/User.model.js";
 
-const store = new MongoDBStore({
-    uri: process.env.MONGO_URL,
-    collection: 'sessions'
+/* ------------------------------------------------------------------ */
+/* Basic setup */
+/* ------------------------------------------------------------------ */
+
+dotenv.config();
+
+const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/* Required for Render / reverse proxy */
+app.set("trust proxy", 1);
+
+/* ------------------------------------------------------------------ */
+/* MongoDB session store */
+/* ------------------------------------------------------------------ */
+
+const MongoStore = MongoDBStore(session);
+
+const store = new MongoStore({
+  uri: process.env.MONGO_URL,
+  collection: "sessions",
 });
+
+/* ------------------------------------------------------------------ */
+/* Middlewares */
+/* ------------------------------------------------------------------ */
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({
+
+app.use(
+  session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: store
-}));
+    store: store,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      sameSite: "lax",
+    },
+  })
+);
 
-app.use((req, res, next) => {
-    if (!req.session.user) {
-        return next();
-    }
-    User.findById(req.session.user._id)
-        .then(user => {
-            req.user = user;
-            next();
-        })
-        .catch(err => console.log(err));
-});
+/* Attach logged-in user to request */
+app.use(async (req, res, next) => {
+  if (!req.session.user) return next();
 
-app.use((req, res, next) => {
-    res.locals.isAuthenticated = req.session.isLoggedIn;
-    res.locals.user = req.session.user;
-    res.locals.isAdmin = req.session.isAdmin;
+  try {
+    const user = await User.findById(req.session.user._id);
+    req.user = user;
     next();
+  } catch (err) {
+    console.error("User fetch error:", err);
+    next();
+  }
 });
 
-app.use('/auth', authRouter);
-app.use('/admin', adminRouter);
-app.use('/', appRouter)
-app.set("view engine", "ejs")
-app.set("views", "views")
-app.use(express.static('public'))
-mongoose.connect(process.env.MONGO_URL).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((error) => {
-    console.log("Failed to connect to MongoDB", error);
-})
-const PORT = process.env.PORT || 3000
+/* Global template variables */
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn || false;
+  res.locals.user = req.session.user || null;
+  res.locals.isAdmin = req.session.isAdmin || false;
+  next();
+});
+
+/* ------------------------------------------------------------------ */
+/* View engine */
+/* ------------------------------------------------------------------ */
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+/* ------------------------------------------------------------------ */
+/* Static files */
+/* ------------------------------------------------------------------ */
+
+app.use(express.static(path.join(__dirname, "public")));
+
+/* ------------------------------------------------------------------ */
+/* Routes */
+/* ------------------------------------------------------------------ */
+
+app.use("/auth", authRouter);
+app.use("/admin", adminRouter);
+app.use("/", appRouter);
+
+/* ------------------------------------------------------------------ */
+/* Database connection */
+/* ------------------------------------------------------------------ */
+
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => {
+    console.error("MongoDB connection failed:", err);
+    process.exit(1);
+  });
+
+/* ------------------------------------------------------------------ */
+/* Server start */
+/* ------------------------------------------------------------------ */
+
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-    console.log(`Server started at port ${PORT}`);
-    console.log(process.env.SESSION_SECRET);
-})  
+  console.log(`Server running on port ${PORT}`);
+});
