@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= pageTitle %>
+  </title>
+  <link rel="stylesheet" href="/output.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-black">
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    <%- include('../partials/nav.ejs') %>
+
+      <main class="flex-grow pt-24 pb-12 px-4 flex items-center justify-center">
+        <div class="w-full max-w-2xl">
+          <div class="glass-effect rounded-2xl p-8 md:p-10 border border-white/5">
+            <div class="mb-8 text-center">
+              <h1 class="text-3xl md:text-4xl font-display font-bold mb-2">
+                <%= editing ? 'Edit Event' : 'Add New Event' %>
+              </h1>
+              <p class="text-text-muted">Fill in the details below to <%= editing ? 'update the' : 'create a' %> event.
+              </p>
+            </div>
+
+            <% if (errorMessage) { %>
+              <div class="bg-red-500/10 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg relative mb-6"
+                role="alert">
+                <span class="block sm:inline">
+                  <%= errorMessage %>
+                </span>
+              </div>
+              <% } %>
+
+                <form action="/admin/events/<%= editing ? 'edit' : 'new' %>" method="POST" enctype="multipart/form-data"
+                  class="space-y-6">
+                  <!-- Title -->
+                  <div>
+                    <label for="title" class="form-label">Event Title</label>
+                    <input type="text" id="title" name="title" class="form-input"
+                      value="<%= editing || event ? event.title : '' %>" required>
+                  </div>
+
+                  <!-- Type & Time Row -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label for="type" class="form-label">Event Type</label>
+                      <select id="type" name="type" class="form-input" required>
+                        <option value="" disabled <%=!editing && !event ? 'selected' : '' %>>Select Type</option>
+                        <option value="Workshop" <%=(editing || event) && event.type==='Workshop' ? 'selected' : '' %>
+                          >Workshop</option>
+                        <option value="Hackathon" <%=(editing || event) && event.type==='Hackathon' ? 'selected' : '' %>
+                          >Hackathon</option>
+                        <option value="Tech Talk" <%=(editing || event) && event.type==='Tech Talk' ? 'selected' : '' %>
+                          >Tech Talk</option>
+                        <option value="Contest" <%=(editing || event) && event.type==='Contest' ? 'selected' : '' %>
+                          >Contest</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="time" class="form-label">Time Duration</label>
+                      <input type="text" id="time" name="time" class="form-input" placeholder="e.g. 10:00 AM - 2:00 PM"
+                        value="<%= editing || event ? event.time : '' %>" required>
+                    </div>
+                  </div>
+
+                  <!-- Date -->
+                  <div>
+                    <label for="date" class="form-label">Event Date</label>
+                    <input type="date" id="date" name="date" class="form-input"
+                      value="<%= (editing || event) && event.date ? new Date(event.date).toISOString().split('T')[0] : '' %>"
+                      required>
+                  </div>
+
+                  <!-- Registration Link (Optional) -->
+                  <div>
+                    <label for="registrationLink" class="form-label">Registration Link (Optional)</label>
+                    <input type="url" id="registrationLink" name="registrationLink" class="form-input"
+                      placeholder="https://..." value="<%= editing || event ? event.registrationLink : '' %>">
+                    <p class="text-xs text-text-muted mt-1">Leave empty to hide the 'Register Now' button.</p>
+                  </div>
+
+                  <!-- Image -->
+                  <div>
+                    <label for="image" class="form-label">Event Image</label>
+                    <input type="file" id="image" name="image"
+                      class="form-input text-sm text-text-muted file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                      <%=!editing ? 'required' : '' %>>
+                    <% if (editing && event && event.image) { %>
+                      <p class="text-xs text-text-muted mt-2">Leave empty to keep existing image.</p>
+                      <% } %>
+                  </div>
+
+                  <!-- Description -->
+                  <div>
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="description" rows="4" class="form-input"
+                      required><%= editing || event ? event.description : '' %></textarea>
+                  </div>
+
+                  <% if (editing) { %>
+                    <input type="hidden" name="eventId" value="<%= event._id %>">
+                    <% } %>
+
+                      <div class="pt-4 flex gap-4">
+                        <a href="/admin/events"
+                          class="flex-1 py-3 px-6 rounded-lg border border-white/10 text-center font-bold text-text-muted hover:bg-white/5 transition-colors uppercase text-sm">Cancel</a>
+                        <button type="submit" class="flex-1 btn-cyber py-3 px-6 rounded-lg font-bold uppercase text-sm">
+                          <%= editing ? 'Update Event' : 'Create Event' %>
+                        </button>
+                      </div>
+                </form>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+  </div>
+  <script src="/js/home.js"></script>
+</body>
+
+</html>

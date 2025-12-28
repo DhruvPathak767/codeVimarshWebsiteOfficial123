@@ -1,0 +1,344 @@
+/* ============================================
+   ADMIN DASHBOARD SPECIFIC STYLES
+   Enhanced stats, charts, and animations
+   ============================================ */
+
+/* Dashboard Container */
+.dashboard-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Stats Grid Animation */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Individual Stat Card with Stagger */
+.stat-card {
+  position: relative;
+  background: rgba(15, 5, 41, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeUp 0.6s ease-out backwards;
+}
+
+.stat-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stat-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stat-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stat-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Top Border Accent */
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+      var(--primary, #00F0FF) 0%,
+      var(--secondary, #7000FF) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Stat Card Hover */
+.stat-card:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(0, 240, 255, 0.15);
+  transform: translateY(-8px);
+}
+
+/* Stat Card Background Glow */
+.stat-card-glow {
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.stat-card:hover .stat-card-glow {
+  opacity: 1;
+}
+
+/* Stat Number - Animated Counter */
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary, #00F0FF) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: countUp 1s ease-out backwards;
+  display: inline-block;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Stat Label */
+.stat-label {
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+/* Stat Sublabel */
+.stat-sublabel {
+  font-size: 0.75rem;
+  color: var(--primary, #00F0FF);
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* Stat Breakdown (for events: upcoming vs completed) */
+.stat-breakdown {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.stat-breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Quick Actions Section */
+.quick-actions-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeUp 0.6s ease-out 0.5s backwards;
+}
+
+.quick-actions-title::before {
+  content: '';
+  width: 4px;
+  height: 2rem;
+  background: var(--primary, #00F0FF);
+  border-radius: 2px;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  animation: fadeUp 0.6s ease-out 0.6s backwards;
+}
+
+/* Quick Action Card */
+.quick-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: rgba(15, 5, 41, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-action::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 240, 255, 0.1),
+      transparent);
+  transition: left 0.6s ease;
+}
+
+.quick-action:hover::before {
+  left: 100%;
+}
+
+.quick-action:hover {
+  background: rgba(0, 240, 255, 0.05);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateX(8px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Quick Action Content */
+.quick-action-content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.quick-action:hover .quick-action-content h3 {
+  color: var(--primary, #00F0FF);
+}
+
+.quick-action-content p {
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.8);
+}
+
+/* Quick Action Icon */
+.quick-action-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.quick-action:hover .quick-action-icon {
+  background: var(--primary, #00F0FF);
+  color: #000;
+  transform: rotate(15deg) scale(1.15);
+}
+
+/* Chart Placeholder (for future chart integration) */
+.chart-placeholder {
+  width: 100%;
+  height: 300px;
+  background: rgba(15, 5, 41, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(148, 163, 184, 0.5);
+  font-size: 1rem;
+  font-weight: 600;
+  animation: skeleton 1.5s infinite;
+}
+
+@keyframes skeleton {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Activity Feed (optional enhancement) */
+.activity-feed {
+  background: rgba(15, 5, 41, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activity-item {
+  padding: 1rem;
+  border-left: 2px solid rgba(0, 240, 255, 0.3);
+  margin-bottom: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-left-color: var(--primary, #00F0FF);
+  transform: translateX(5px);
+}
+
+.activity-timestamp {
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.6);
+  margin-top: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

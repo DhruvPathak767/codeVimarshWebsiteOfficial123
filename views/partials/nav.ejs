@@ -1,0 +1,197 @@
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+
+            <!-- Logo Section (Left) -->
+            <a href="<% if (isAdmin) { %>/admin<% } else { %>/<% }%>" class="flex items-center group cursor-pointer">
+                <img src="/images/logo.svg" alt="Code Vimarsh Logo"
+                    class="h-8 w-auto transition-transform duration-300 transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(var(--color-primary),0.6)] animate-fade-in">
+            </a>
+
+            <!-- Desktop Navigation Links (Center/Right) -->
+            <div class="hidden md:flex items-center space-x-8">
+
+                <% if (!isAdmin) { %>
+                    <a href="/" class="nav-link text-sm font-code tracking-wide">
+                        HOME
+                    </a>
+                    <a href="/about" class="nav-link text-sm font-code tracking-wide">
+                        ABOUT
+                    </a>
+                    <a href="/events" class="nav-link text-sm font-code tracking-wide">
+                        EVENTS
+                    </a>
+                    <a href="/team" class="nav-link text-sm font-code tracking-wide">
+                        TEAM
+                    </a>
+                    <a href="/resources" class="nav-link text-sm font-code tracking-wide">
+                        RESOURCES
+                    </a>
+
+                    <% } else { %>
+                        <a href="/admin" class="nav-link text-sm font-code tracking-wide">
+                            DASHBOARD
+                        </a>
+                        <a href="/admin/events" class="nav-link text-sm font-code tracking-wide">
+                            MANAGE EVENTS
+                        </a>
+                        <a href="/admin/team" class="nav-link text-sm font-code tracking-wide">
+                            MANAGE TEAM
+                        </a>
+                        <a href="/admin/resources" class="nav-link text-sm font-code tracking-wide">
+                            MANAGE RESOURCES
+                        </a>
+                        <% } %>
+
+            </div>
+
+            <!-- CTA Button (Desktop) -->
+            <div class="hidden md:block">
+                <% if (isAuthenticated) { %>
+                    <ul class="flex items-center space-x-4">
+                        <% if (!isAdmin) { %>
+                            <li class="flex items-center">
+
+                                <a href="/profile" class="text-text-muted hover:text-primary transition-colors mr-4"
+                                    title="My Profile">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <%} %>
+                                <li class="flex items-center">
+                                    <form action="/logout" method="POST" class="inline-block">
+                                        <button type="submit"
+                                            class="btn-cyber px-6 py-2 text-sm font-bold rounded-sm tracking-wider uppercase">
+                                            Logout
+                                        </button>
+                                    </form>
+
+                                </li>
+                    </ul>
+
+
+                    <% } else { %>
+                        <a href="/signup"
+                            class="inline-block btn-cyber px-6 py-2 text-sm font-bold rounded-sm tracking-wider uppercase">
+                            Join us
+                        </a>
+                        <% } %>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-btn"
+                    class="text-text-muted hover:text-primary transition-colors focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobile-menu-backdrop"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobile-menu"
+        class="fixed top-0 right-0 h-full w-64 bg-background border-l border-primary/20 glass-effect z-50 transform translate-x-full transition-transform duration-300 ease-out hidden shadow-[0_0_30px_rgba(var(--color-primary),0.2)]">
+
+        <!-- Sidebar Header with Close Button -->
+        <div class="flex items-center justify-between p-6 border-b border-white/5">
+            <span class="text-xl font-bold font-orbitron tracking-wider text-primary">MENU</span>
+            <button id="mobile-menu-close"
+                class="text-text-muted hover:text-primary transition-colors focus:outline-none group">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 transform group-hover:rotate-90 transition-transform duration-300" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Scrollable Menu Items -->
+        <div class="px-6 py-8 space-y-6 overflow-y-auto max-h-[calc(100vh-80px)]">
+
+            <% if (!isAdmin) { %>
+                <a href="/"
+                    class="mobile-menu-item block text-text-main text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                    >> HOME
+                </a>
+                <a href="/about"
+                    class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                    >> ABOUT
+                </a>
+                <a href="/events"
+                    class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                    >> EVENTS
+                </a>
+                <a href="/team"
+                    class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                    >> TEAM
+                </a>
+                <a href="/resources"
+                    class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                    >> RESOURCES
+                </a>
+                <% } else { %>
+                    <a href="/admin"
+                        class="mobile-menu-item block text-text-main text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                        >> DASHBOARD
+                    </a>
+                    <a href="/admin/events"
+                        class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                        >> MANAGE EVENTS
+                    </a>
+                    <a href="/admin/team"
+                        class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                        >> MANAGE TEAM
+                    </a>
+                    <a href="/admin/resources"
+                        class="mobile-menu-item block text-text-muted text-lg font-code hover:text-primary transition-all duration-300 hover:translate-x-2 opacity-0 translate-x-4">
+                        >> MANAGE RESOURCES
+                    </a>
+                    <% } %>
+
+                        <div class="border-t border-white/5 pt-6 mt-6 mobile-menu-item opacity-0">
+                            <% if (isAuthenticated) { %>
+                                <% if (!isAdmin) { %>
+                                    <a href="/profile"
+                                        class="flex items-center space-x-3 text-text-muted hover:text-primary transition-colors mb-6 group">
+                                        <div
+                                            class="p-2 rounded-full border border-white/10 group-hover:border-primary/50 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                        </div>
+                                        <span class="font-code text-sm">MY PROFILE</span>
+                                    </a>
+                                    <% } %>
+                                        <form action="/logout" method="POST">
+                                            <button type="submit"
+                                                class="btn-cyber w-full py-3 text-sm font-bold uppercase tracking-wider">
+                                                Logout
+                                            </button>
+                                        </form>
+                                        <% } else { %>
+                                            <a href="/signup"
+                                                class="block text-center btn-cyber w-full py-3 text-sm font-bold uppercase tracking-wider">
+                                                Join System
+                                            </a>
+                                            <% } %>
+                        </div>
+
+        </div>
+    </div>
+    <script src="/js/nav.js"></script>
+</nav>

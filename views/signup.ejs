@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Code Vimarsh</title>
+    <link rel="stylesheet" href="/output.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Radio and Checkbox Groups - Specific to signup */
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary);
+            cursor: pointer;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+        }
+
+        .checkbox-group label {
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-code" style="background-color: var(--bg-primary);">
+    <!-- Navigation Bar -->
+    <%- include('./partials/nav.ejs') %>
+
+        <!-- Signup Section -->
+        <section class="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
+            <div class="w-full max-w-2xl">
+                <!-- Glassmorphism Card -->
+                <div class="glass-effect rounded-2xl p-8 md:p-12 border border-soft relative overflow-hidden">
+                    <!-- Background glow effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5">
+                    </div>
+
+                    <div class="relative z-10">
+                        <!-- Header -->
+                        <div class="text-center mb-8 animate-fade-up">
+                            <h1 class="text-4xl md:text-5xl font-bold text-gradient mb-2 glitch-hover cursor-default">
+                                Join the Community
+                            </h1>
+                            <p class="text-text-muted">Start your journey with Code Vimarsh</p>
+                        </div>
+
+                        <% if (errorMessage) { %>
+                            <div class="bg-red-500/10 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg relative mb-6"
+                                role="alert">
+                                <span class="block sm:inline">
+                                    <%= errorMessage %>
+                                </span>
+                            </div>
+                            <% } %>
+
+                                <!-- Signup Form -->
+                                <form id="signupForm" action="/signup" method="POST"
+                                    class="space-y-6 animate-fade-up delay-100">
+                                    <!-- Full Name -->
+                                    <div class="form-group">
+                                        <input type="text" id="fullname" name="fullname"
+                                            class="form-input <%= validationErrors.find(e => e.path === 'fullname') ? 'error' : '' %>"
+                                            placeholder=" " value="<%= oldInput.fullname %>" required>
+                                        <label for="fullname" class="form-label">Full Name</label>
+                                        <div class="error-message" id="fullname-error">Full Name is required</div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="form-group">
+                                        <input type="email" id="email" name="email"
+                                            class="form-input <%= validationErrors.find(e => e.path === 'email') ? 'error' : '' %>"
+                                            placeholder=" " value="<%= oldInput.email %>" required>
+                                        <label for="email" class="form-label">Email</label>
+                                        <div class="error-message" id="email-error">Valid email is required</div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="form-group">
+                                        <div class="relative">
+                                            <input type="password" id="password" name="password"
+                                                class="form-input pr-12 <%= validationErrors.find(e => e.path === 'password') ? 'error' : '' %>"
+                                                placeholder=" " value="<%= oldInput.password %>" required>
+                                            <label for="password" class="form-label">Password</label>
+                                            <button type="button" id="toggle-password"
+                                                class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-primary transition-colors focus:outline-none">
+                                                <svg id="eye-open-password" class="h-5 w-5" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                <svg id="eye-closed-password" class="h-5 w-5 hidden" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="error-message" id="password-error">Password is required</div>
+                                    </div>
+
+                                    <!-- Confirm Password -->
+                                    <div class="form-group">
+                                        <div class="relative">
+                                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                                class="form-input pr-12 <%= validationErrors.find(e => e.path === 'confirmPassword') ? 'error' : '' %>"
+                                                placeholder=" " value="<%= oldInput.confirmPassword %>" required>
+                                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                            <button type="button" id="toggle-confirm-password"
+                                                class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-primary transition-colors focus:outline-none">
+                                                <svg id="eye-open-confirm" class="h-5 w-5" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                </svg>
+                                                <svg id="eye-closed-confirm" class="h-5 w-5 hidden" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="error-message" id="confirmPassword-error">Passwords do not match
+                                        </div>
+                                    </div>
+
+                                    <!-- PRN Number -->
+                                    <div class="form-group">
+                                        <input type="text" id="prn" name="prn"
+                                            class="form-input <%= validationErrors.find(e => e.path === 'prn') ? 'error' : '' %>"
+                                            placeholder=" " value="<%= oldInput.prn %>" required>
+                                        <label for="prn" class="form-label">PRN Number</label>
+                                        <div class="error-message" id="prn-error">PRN Number is required</div>
+                                    </div>
+
+                                    <!-- Class -->
+                                    <div class="form-group">
+                                        <input type="text" id="class" name="classname"
+                                            class="form-input <%= validationErrors.find(e => e.path === 'classname') ? 'error' : '' %>"
+                                            placeholder=" " value="<%= oldInput.classname %>" required>
+                                        <label for="class" class="form-label">Class</label>
+                                        <div class="error-message" id="class-error">Class is required</div>
+                                    </div>
+
+                                    <!-- Department -->
+                                    <div class="form-group">
+                                        <input type="text" id="department" name="department"
+                                            class="form-input <%= validationErrors.find(e => e.path === 'department') ? 'error' : '' %>"
+                                            placeholder=" " value="<%= oldInput.department %>" required>
+                                        <label for="department" class="form-label">Department</label>
+                                        <div class="error-message" id="department-error">Department is required</div>
+                                    </div>
+
+
+
+                                    <!-- Terms & Conditions -->
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="terms" name="terms" required>
+                                        <label for="terms">I agree to the Terms & Conditions</label>
+                                    </div>
+                                    <div class="error-message" id="terms-error"
+                                        style="margin-top: -1rem; margin-bottom: 1rem;">You must agree to the Terms &
+                                        Conditions</div>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit"
+                                        class="w-full px-8 py-3 text-base font-bold text-white bg-gradient-to-r from-primary to-secondary rounded-lg glow-hover transition-all transform hover:scale-105">
+                                        Create Account
+                                    </button>
+                                </form>
+
+
+                                <!-- Sign In Link -->
+                                <div class="mt-6 text-center animate-fade-up delay-200">
+                                    <p class="text-text-muted">
+                                        Already have an account?
+                                        <a href="/signin"
+                                            class="text-secondary hover:opacity-80 font-semibold transition-colors">
+                                            Sign In
+                                        </a>
+                                    </p>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <%- include('./partials/footer.ejs') %>
+
+            <!-- Mobile Menu Script -->
+            <script src="/js/home.js"></script>
+
+            <!-- Form Validation Script -->
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const form = document.getElementById('signupForm');
+                    const inputs = form.querySelectorAll('input[required]');
+                    const password = document.getElementById('password');
+                    const confirmPassword = document.getElementById('confirmPassword');
+                    const terms = document.getElementById('terms');
+
+                    // Show error function
+                    function showError(input, errorId, message) {
+                        input.classList.add('error');
+                        const errorElement = document.getElementById(errorId);
+                        errorElement.textContent = message;
+                        errorElement.style.display = 'block';
+                    }
+
+                    // Hide error function
+                    function hideError(input, errorId) {
+                        input.classList.remove('error');
+                        document.getElementById(errorId).style.display = 'none';
+                    }
+
+                    // Validate individual field
+                    function validateField(input) {
+                        const fieldName = input.name;
+                        const errorId = `${fieldName}-error`;
+
+                        if (input.type === 'email') {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!input.value || !emailRegex.test(input.value)) {
+                                showError(input, errorId, 'Valid email is required');
+                                return false;
+                            }
+                        } else if (input.type === 'password') {
+                            if (!input.value) {
+                                showError(input, errorId, 'Password is required');
+                                return false;
+                            }
+                        } else if (input.type === 'radio') {
+                            const radioGroup = document.querySelectorAll(`input[name="${input.name}"]`);
+                            const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                            if (!isChecked) {
+                                showError(radioGroup[0], `${input.name}-error`, 'Please select a user type');
+                                return false;
+                            }
+                        } else if (input.type === 'checkbox') {
+                            if (!input.checked) {
+                                showError(input, errorId, 'You must agree to the Terms & Conditions');
+                                return false;
+                            }
+                        } else {
+                            if (!input.value.trim()) {
+                                showError(input, errorId, `${input.nextElementSibling.textContent} is required`);
+                                return false;
+                            }
+                        }
+
+                        hideError(input, errorId);
+                        return true;
+                    }
+
+                    // Validate password match
+                    function validatePasswordMatch() {
+                        if (confirmPassword.value && password.value !== confirmPassword.value) {
+                            showError(confirmPassword, 'confirmPassword-error', 'Passwords do not match');
+                            return false;
+                        } else if (confirmPassword.value) {
+                            hideError(confirmPassword, 'confirmPassword-error');
+                        }
+                        return true;
+                    }
+
+                    // Real-time validation on input
+                    inputs.forEach(input => {
+                        input.addEventListener('blur', () => {
+                            if (input === confirmPassword) {
+                                validatePasswordMatch();
+                            } else {
+                                validateField(input);
+                            }
+                        });
+
+                        input.addEventListener('input', () => {
+                            if (input.classList.contains('error')) {
+                                if (input === confirmPassword) {
+                                    validatePasswordMatch();
+                                } else {
+                                    validateField(input);
+                                }
+                            }
+                        });
+                    });
+
+                    // Validate password match on confirm password input
+                    confirmPassword.addEventListener('input', validatePasswordMatch);
+                    password.addEventListener('input', () => {
+                        if (confirmPassword.value) {
+                            validatePasswordMatch();
+                        }
+                    });
+
+
+
+                    // Form submission
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        try {
+                            let isValid = true;
+
+                            // Validate all fields
+                            inputs.forEach(input => {
+                                if (input.type === 'radio') {
+                                    const radioGroup = document.querySelectorAll(`input[name="${input.name}"]`);
+                                    const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                                    if (!isChecked) {
+                                        showError(radioGroup[0], `${input.name}-error`, 'Please select a user type');
+                                        isValid = false;
+                                    }
+                                } else if (!validateField(input)) {
+                                    isValid = false;
+                                }
+                            });
+
+                            // Validate password match
+                            if (!validatePasswordMatch()) {
+                                isValid = false;
+                            }
+
+                            // Validate terms
+                            if (!terms.checked) {
+                                showError(terms, 'terms-error', 'You must agree to the Terms & Conditions');
+                                isValid = false;
+                            }
+
+                            if (isValid) {
+                                // Form is valid - submit to backend
+                                form.submit();
+                            }
+                        } catch (err) {
+                            console.error("Validation error:", err);
+                            // Fallback: submit anyway
+                            form.submit();
+                        }
+                    });
+
+                    // Password toggle functionality
+                    const togglePassword = document.getElementById('toggle-password');
+                    const passwordInput = document.getElementById('password');
+                    const eyeOpenPassword = document.getElementById('eye-open-password');
+                    const eyeClosedPassword = document.getElementById('eye-closed-password');
+
+                    if (togglePassword && passwordInput) {
+                        togglePassword.addEventListener('click', () => {
+                            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            passwordInput.setAttribute('type', type);
+                            eyeOpenPassword.classList.toggle('hidden');
+                            eyeClosedPassword.classList.toggle('hidden');
+                        });
+                    }
+
+                    // Confirm password toggle functionality
+                    const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+                    const confirmPasswordInput = document.getElementById('confirmPassword');
+                    const eyeOpenConfirm = document.getElementById('eye-open-confirm');
+                    const eyeClosedConfirm = document.getElementById('eye-closed-confirm');
+
+                    if (toggleConfirmPassword && confirmPasswordInput) {
+                        toggleConfirmPassword.addEventListener('click', () => {
+                            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                            confirmPasswordInput.setAttribute('type', type);
+                            eyeOpenConfirm.classList.toggle('hidden');
+                            eyeClosedConfirm.classList.toggle('hidden');
+                        });
+                    }
+                });
+            </script>
+</body>
+
+</html>

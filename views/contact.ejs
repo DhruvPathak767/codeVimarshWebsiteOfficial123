@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= pageTitle %>
+  </title>
+  <link rel="stylesheet" href="/output.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-black">
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    <%- include('./partials/nav.ejs') %>
+
+      <main class="flex-grow pt-24 pb-12">
+        <div class="text-center mb-16 px-4">
+          <h1 class="text-4xl md:text-6xl font-display font-bold mb-4">
+            Get in <span class="text-gradient">Touch</span>
+          </h1>
+          <div class="w-32 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+        </div>
+
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid md:grid-cols-2 gap-12">
+            <!-- Contact Info -->
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-6">Contact Info</h3>
+              <div class="space-y-6">
+                <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-xl">
+                    📧
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-white">Email Us</h4>
+                    <p class="text-text-muted text-sm font-code">contact@codevimarsh.com</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary text-xl">
+                    📍
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-white">Visit Us</h4>
+                    <p class="text-text-muted text-sm">Faculty of Tech & Engg,<br>MS University, Baroda</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent text-xl">
+                    📱
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-white">Socials</h4>
+                    <div class="flex space-x-4 mt-2">
+                      <!-- Community & Location -->
+                      <div class="space-y-8">
+                        <!-- Community Card -->
+                        <div
+                          class="glass-effect p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all group">
+                          <div class="flex items-center gap-4 mb-6">
+                            <div
+                              class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                              🚀
+                            </div>
+                            <div>
+                              <h3 class="text-2xl font-bold text-white">Join Our Community</h3>
+                              <p class="text-text-muted text-sm">Connect with fellow developers</p>
+                            </div>
+                          </div>
+
+                          <p class="text-text-muted mb-6 leading-relaxed">
+                            Be part of the specialized coding community of The M.S. University of Baroda. Share
+                            knowledge, collaborate on projects, and grow together.
+                          </p>
+
+                          <div class="grid grid-cols-2 gap-4">
+                            <a href="#"
+                              class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#5865F2]/10 text-[#5865F2] hover:bg-[#5865F2] hover:text-white transition-all font-bold border border-[#5865F2]/20">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037 3.42 3.42 0 0 0-.62 1.27.077.077 0 0 0 .046.087 39.09 39.09 0 0 0 1.956.49h.001c.6.155 1.19.324 1.77.51a.06.06 0 0 1 .015.085 2 2 0 0 0-.253.253.063.063 0 0 1-.082.01c-.149-.065-.3-.13-.451-.191a9.07 9.07 0 0 0-.47-.182.06.06 0 0 1-.019-.086 2.062 2.062 0 0 1 .25-.26.062.062 0 0 0-.012-.093 3.19 3.19 0 0 1-.58-.175.061.061 0 0 0-.081.02 12.3 12.3 0 0 1-1.393.978.06.06 0 0 1-.08-.016c-.056-.052-.112-.104-.166-.158a.062.062 0 0 0-.095.009 13.9 13.9 0 0 1-1.782 1.59.06.06 0 0 1-.085-.015c-.056-.056-.111-.114-.164-.173a.06.06 0 0 0-.092.007 14.88 14.88 0 0 1-1.896 1.18.061.061 0 0 1-.083-.027c-.035-.05-.07-.101-.103-.153a.06.06 0 0 0-.092-.008c-.5.295-1.006.58-1.517.854a.06.06 0 0 1-.083-.021c-.02-.033-.04-.067-.059-.1a.061.061 0 0 0-.096-.008 19.851 19.851 0 0 1-3.6 1.408.077.077 0 0 0-.05.106 3.42 3.42 0 0 0 1.27 3.42.074.074 0 0 0 .079.037A19.791 19.791 0 0 0 3.683 4.37a.077.077 0 0 0-.036.082c.42 3.682 1.838 7.03 4.093 9.875a.06.06 0 0 0 .093.006c.394-.48.747-.992 1.058-1.533a.061.061 0 0 0-.05-.088 10.15 10.15 0 0 1-1.573-.757.061.061 0 0 1-.013-.098c.114-.085.226-.174.336-.265a.06.06 0 0 1 .082.001 14.2 14.2 0 0 0 4.14 2.115.061.061 0 0 0 .074-.035c.176-.43.325-.873.447-1.326a.061.061 0 0 1 .114.025 18.05 18.05 0 0 1-.77 4.1.06.06 0 0 1-.106.024 10.02 10.02 0 0 1-1.606-.822.06.06 0 0 0-.093.047c.453 1.258 1.09 2.427 1.87 3.48a.06.06 0 0 0 .094.004c2.81-2.227 4.49-5.32 5.06-8.545a.077.077 0 0 0-.036-.082Z" />
+                              </svg>
+                              Discord
+                            </a>
+                            <a href="#"
+                              class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all font-bold border border-[#25D366]/20">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                              </svg>
+                              WhatsApp
+                            </a>
+                          </div>
+                        </div>
+
+                        <!-- Map Embed -->
+                        <div
+                          class="glass-effect p-2 rounded-3xl border border-white/5 h-64 overflow-hidden relative group">
+                          <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.018693892305!2d73.19323331495495!3d22.31513088531596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc5a05b3317e3%3A0xe9c5220c354589d1!2sFaculty%20of%20Technology%20and%20Engineering%2C%20The%20Maharaja%20Sayajirao%20University%20of%20Baroda!5e0!3m2!1sen!2sin!4v1672338423456!5m2!1sen!2sin"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60 group-hover:opacity-100">
+                          </iframe>
+                          <div class="absolute inset-0 pointer-events-none border border-white/10 rounded-2xl"></div>
+                        </div>
+                      </div>
+                    </div>
+        </section>
+      </main>
+
+      <%- include('./partials/footer.ejs') %>
+  </div>
+  <script src="/js/home.js"></script>
+</body>
+
+</html>

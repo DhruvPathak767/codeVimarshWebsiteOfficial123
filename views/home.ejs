@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Vimarsh - Define the Future</title>
+    <link rel="stylesheet" href="/output.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/buttons.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-black">
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+        <!-- Navigation Bar -->
+        <%- include('./partials/nav.ejs') %>
+
+            <main class="flex-grow">
+                <!-- Hero Section -->
+                <section id="home"
+                    class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-b from-transparent via-bg-secondary/50 to-bg-primary pointer-events-none">
+                    </div>
+
+                    <div class="relative z-10 text-center max-w-5xl mx-auto">
+                        <div
+                            class="inline-block mb-4 px-4 py-1 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm animate-fade-in">
+                            <span class="font-code text-primary text-sm tracking-wider">EST. 2024 // MSU BARODA</span>
+                        </div>
+
+                        <div class="flex justify-center mb-8 animate-slide-up">
+                            <img src="/images/logo.svg" alt="Code Vimarsh"
+                                class="h-24 md:h-36 w-auto hover:drop-shadow-[0_0_15px_rgba(var(--color-primary),0.8)] transition-all duration-500 ease-in-out transform hover:scale-105">
+                        </div>
+
+                        <p
+                            class="text-xl md:text-2xl text-text-muted max-w-3xl mx-auto mb-12 font-light leading-relaxed animate-slide-up delay-100">
+                            The epicenter of <span class="text-primary font-semibold">innovation</span> and <span
+                                class="text-secondary font-semibold">algorithmic mastery</span>.
+                            We don't just write code; we architect the future.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center animate-slide-up delay-200">
+                            <% if (!isAuthenticated) { %>
+                                <a href="/signup"
+                                    class="btn-cyber px-10 py-4 text-lg font-bold tracking-wide rounded-sm uppercase">
+                                    join the community
+                                </a>
+                                <% } %>
+                                    <a href="/about"
+                                        class="px-10 py-4 text-lg font-medium text-text-muted hover:text-white transition-colors border border-white/10 hover:border-white/30 rounded-sm uppercase tracking-wide">
+                                        Explore Protocols
+                                    </a>
+                        </div>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <%- include('./partials/footer.ejs') %>
+    </div>
+    <script src="/js/home.js"></script>
+</body>
+
+</html>

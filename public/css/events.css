@@ -1,0 +1,331 @@
+/* ============================================
+   EVENTS PAGE SPECIFIC STYLES
+   Enhanced animations for event cards
+   ============================================ */
+
+/* Events Page Container */
+.events-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Activity Cards Grid */
+.activity-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Activity Card Enhanced */
+.activity-card {
+  background: rgba(15, 5, 41, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeUp 0.6s ease-out backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Stagger animation delays */
+.activity-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.activity-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.activity-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.activity-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.activity-card:hover {
+  background: rgba(15, 5, 41, 0.8);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(0, 240, 255, 0.15);
+}
+
+/* Activity Card Icon */
+.activity-card-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.activity-card:hover .activity-card-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Event Card (Upcoming/Completed) */
+.event-card {
+  background: rgba(15, 5, 41, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeUp 0.6s ease-out backwards;
+  max-width: 48rem;
+  margin: 0 auto 1.5rem;
+}
+
+.event-card:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 240, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Event Date Badge */
+.event-date-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 5rem;
+  animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.event-date-day {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--secondary, #7000FF) 0%, var(--primary, #00F0FF) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.event-date-month {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(148, 163, 184, 0.8);
+  font-weight: 600;
+}
+
+/* Event Image Container */
+.event-image-container {
+  position: relative;
+  width: 100%;
+  height: 16rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.event-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.event-card:hover .event-image {
+  transform: scale(1.1);
+}
+
+/* Event Status Badge */
+.event-status-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  backdrop-filter: blur(10px);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  animation: fadeIn 0.4s ease-out 0.3s backwards;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.event-status-badge.upcoming {
+  background: rgba(0, 240, 255, 0.9);
+  color: #000;
+}
+
+.event-status-badge.completed {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* Event Type Badge */
+.event-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  background: rgba(0, 240, 255, 0.2);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary, #00F0FF);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Event Title */
+.event-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+  line-height: 1.2;
+}
+
+.event-card:hover .event-title {
+  color: var(--primary, #00F0FF);
+}
+
+/* Event Description */
+.event-description {
+  color: rgba(148, 163, 184, 0.9);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Event Meta Info (Time, etc.) */
+.event-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.7);
+  font-weight: 600;
+}
+
+.event-meta svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Register Button */
+.event-register-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 1px solid var(--primary, #00F0FF);
+  border-radius: 0.375rem;
+  color: var(--primary, #00F0FF);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-register-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 240, 255, 0.3),
+      transparent);
+  transition: left 0.5s ease;
+}
+
+.event-register-btn:hover::before {
+  left: 100%;
+}
+
+.event-register-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* Completed Events Section - Muted Styling */
+.completed-events-section {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.completed-events-section:hover {
+  opacity: 1;
+}
+
+.event-card.completed {
+  filter: grayscale(1);
+  transition: filter 0.5s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.event-card.completed:hover {
+  filter: grayscale(0);
+}
+
+/* Empty State for Events */
+.events-empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(15, 5, 41, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.events-empty-state p {
+  font-size: 1.125rem;
+  color: rgba(148, 163, 184, 0.8);
+}
+
+/* Section Heading */
+.events-section-heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--primary, #00F0FF);
+  animation: fadeUp 0.6s ease-out backwards;
+}
+
+.events-section-heading.completed {
+  color: rgba(148, 163, 184, 0.9);
+  border-left-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .activity-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .event-card {
+    flex-direction: column;
+  }
+
+  .event-title {
+    font-size: 1.5rem;
+  }
+
+  .event-image-container {
+    height: 12rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .activity-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

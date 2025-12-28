@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= pageTitle %>
+  </title>
+  <link rel="stylesheet" href="/output.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-black">
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    <%- include('../partials/nav.ejs') %>
+
+      <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="mb-12">
+            <h1 class="text-3xl md:text-5xl font-display font-bold mb-4">
+              Admin <span class="text-gradient">Dashboard</span>
+            </h1>
+            <p class="text-text-muted font-code text-sm">Real-time platform analytics</p>
+          </div>
+
+          <!-- Metrics Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+
+            <!-- Total Users Card -->
+            <div
+              class="glass-effect p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 relative group overflow-hidden">
+
+              <div class="relative z-10">
+                <div class="text-text-muted text-sm font-code uppercase tracking-wider mb-2"> TOTAL USERS</div>
+                <div class="text-4xl font-bold text-white mb-1">
+                  <%= totalUsers %>
+                </div>
+                <div class="text-xs text-primary font-code">REGISTERED MEMBERS</div>
+              </div>
+            </div>
+
+            <!-- Total Events Card -->
+            <div
+              class="glass-effect p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 relative group overflow-hidden">
+
+              <div class="relative z-10">
+                <div class="text-text-muted text-sm font-code uppercase tracking-wider mb-2">TOTAL EVENTS</div>
+                <div class="text-4xl font-bold text-white mb-1">
+                  <%= totalEvents %>
+                </div>
+                <div class="flex gap-3 text-xs font-code mt-2">
+                  <span class="text-green-400">UPCOMING: <%= upcomingEventsCount %></span>
+                  <span class="text-text-muted">|</span>
+                  <span class="text-gray-400">DONE: <%= completedEventsCount %></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total Resources Card -->
+            <div
+              class="glass-effect p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 relative group overflow-hidden">
+
+              <div class="relative z-10">
+                <div class="text-text-muted text-sm font-code uppercase tracking-wider mb-2">TOTAL RESOURCES</div>
+                <div class="text-4xl font-bold text-white mb-1">
+                  <%= totalResources %>
+                </div>
+                <div class="text-xs text-primary font-code">PUBLISHED MATERIALS</div>
+              </div>
+            </div>
+
+            <!-- New Registrations Card -->
+            <div
+              class="glass-effect p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-all duration-300 relative group overflow-hidden">
+
+              <div class="relative z-10">
+                <div class="text-text-muted text-sm font-code uppercase tracking-wider mb-2">NEW USERS</div>
+                <div class="text-4xl font-bold text-white mb-1">
+                  <%= newRegistrations %>
+                </div>
+                <div class="text-xs text-green-400 font-code">LAST 7 DAYS</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Quick Actions Section (Optional but helpful) -->
+          <div class="mb-12">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <span class="w-2 h-8 bg-primary rounded-sm"></span>
+              Quick Actions
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a href="/admin/events/new"
+                class="glass-effect p-6 rounded-xl border border-white/5 hover:bg-primary/5 hover:border-primary/30 transition-all group flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-white group-hover:text-primary transition-colors">Add New Event</h3>
+                  <p class="text-xs text-text-muted mt-1">Schedule a session</p>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all">
+                  +
+                </div>
+              </a>
+              <a href="/admin/team/new"
+                class="glass-effect p-6 rounded-xl border border-white/5 hover:bg-primary/5 hover:border-primary/30 transition-all group flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-white group-hover:text-primary transition-colors">Add Team Member</h3>
+                  <p class="text-xs text-text-muted mt-1">Grow the team</p>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all">
+                  +
+                </div>
+              </a>
+              <a href="/admin/resources"
+                class="glass-effect p-6 rounded-xl border border-white/5 hover:bg-primary/5 hover:border-primary/30 transition-all group flex items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-white group-hover:text-primary transition-colors">Manage Resources</h3>
+                  <p class="text-xs text-text-muted mt-1">Update content</p>
+                </div>
+                <div
+                  class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all">
+                  →
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+  </div>
+  <script src="/js/home.js"></script>
+</body>
+
+</html>

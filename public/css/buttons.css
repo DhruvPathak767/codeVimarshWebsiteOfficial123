@@ -1,0 +1,330 @@
+/* ============================================
+   BUTTON STYLES - ENHANCED INTERACTIONS
+   Modern, animation-rich button designs
+   ============================================ */
+
+/* Base Button Reset */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ===== EDIT BUTTONS ===== */
+.btn-edit {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-edit:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary, #00F0FF) !important;
+}
+
+.btn-edit:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Glow pulse animation for edit buttons */
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+  }
+}
+
+.btn-edit:focus {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* ===== DELETE BUTTONS ===== */
+.btn-delete {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-delete:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.2) !important;
+}
+
+.btn-delete:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Danger pulse animation */
+@keyframes dangerPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
+  }
+}
+
+.btn-delete:focus {
+  animation: dangerPulse 2s ease-in-out infinite;
+}
+
+/* Shake animation on hover (subtle warning) */
+@keyframes subtleShake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-2px);
+  }
+
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+.btn-delete:hover {
+  animation: subtleShake 0.3s ease-in-out;
+}
+
+/* ===== PRIMARY BUTTONS ===== */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary, #00F0FF) 0%, var(--secondary, #7000FF) 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.6),
+    0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* ===== SECONDARY BUTTONS ===== */
+.btn-secondary {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary, #00F0FF);
+  background: rgba(0, 240, 255, 0.05);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Border glow animation */
+@keyframes borderGlow {
+
+  0%,
+  100% {
+    border-color: rgba(0, 240, 255, 0.3);
+  }
+
+  50% {
+    border-color: rgba(0, 240, 255, 0.8);
+  }
+}
+
+.btn-secondary:focus {
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+/* ===== CYBER BUTTON (existing enhanced) ===== */
+.btn-cyber {
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+  border: 1px solid var(--primary, #00F0FF);
+  color: var(--primary, #00F0FF);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 240, 255, 0.4),
+      transparent);
+  transition: all 0.5s ease;
+}
+
+.btn-cyber:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4),
+    inset 0 0 20px rgba(0, 240, 255, 0.1);
+  color: #fff;
+  text-shadow: 0 0 8px var(--primary, #00F0FF);
+  transform: translateY(-2px);
+}
+
+.btn-cyber:hover::before {
+  left: 100%;
+}
+
+.btn-cyber:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ===== ICON BUTTONS ===== */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-icon:hover {
+  transform: rotate(10deg) scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+}
+
+.btn-icon:active {
+  transform: rotate(0) scale(0.95);
+}
+
+/* Icon spin on hover */
+.btn-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-icon:hover svg {
+  transform: rotate(90deg);
+}
+
+/* ===== LOADING STATE ===== */
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== DISABLED STATE ===== */
+button:disabled,
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ===== BUTTON SIZES ===== */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-md {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+
+  .btn-edit:hover,
+  .btn-delete:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+
+  .btn-edit,
+  .btn-delete,
+  .btn-primary,
+  .btn-secondary,
+  .btn-cyber,
+  .btn-icon {
+    transition: none;
+    animation: none;
+  }
+
+  .btn-edit:hover,
+  .btn-delete:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-icon:hover {
+    transform: none;
+  }
+}

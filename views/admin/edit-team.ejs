@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= pageTitle %>
+  </title>
+  <link rel="stylesheet" href="/output.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="antialiased selection:bg-primary selection:text-black">
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    <%- include('../partials/nav.ejs') %>
+
+      <main class="flex-grow pt-24 pb-12 px-4 flex items-center justify-center">
+        <div class="w-full max-w-2xl">
+          <div class="glass-effect rounded-2xl p-8 md:p-10 border border-white/5">
+            <div class="mb-8 text-center">
+              <h1 class="text-3xl md:text-4xl font-display font-bold mb-2">
+                <%= editing ? 'Edit Member' : 'Add New Member' %>
+              </h1>
+              <p class="text-text-muted">Fill in the details below to <%= editing ? 'update the' : 'add a' %> team
+                  member.
+              </p>
+            </div>
+
+            <% if (errorMessage) { %>
+              <div class="bg-red-500/10 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg relative mb-6"
+                role="alert">
+                <span class="block sm:inline">
+                  <%= errorMessage %>
+                </span>
+              </div>
+              <% } %>
+
+                <form action="/admin/team/<%= editing ? 'edit' : 'new' %>" method="POST" enctype="multipart/form-data"
+                  class="space-y-6">
+
+                  <!-- Name -->
+                  <div>
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-input"
+                      value="<%= editing || member ? member.name : '' %>" required>
+                  </div>
+
+                  <!-- Position & Role Row -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label for="position" class="form-label">Position Type</label>
+                      <select id="position" name="position" class="form-input" required>
+                        <option value="" disabled <%=!editing && !member ? 'selected' : '' %>>Select Type</option>
+                        <option value="initiators" <%=(editing || member) && member.position==='initiators' ? 'selected'
+                          : '' %>
+                          >Initiator</option>
+                        <option value="members" <%=(editing || member) && member.position==='members' ? 'selected' : ''
+                          %>
+                          >Member</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="role" class="form-label">Display Role</label>
+                      <input type="text" id="role" name="role" class="form-input"
+                        placeholder="e.g. President, Club Lead" value="<%= editing || member ? member.role : '' %>"
+                        required>
+                    </div>
+                  </div>
+
+                  <!-- LinkedIn -->
+                  <div>
+                    <label for="linkedin" class="form-label">LinkedIn URL</label>
+                    <input type="url" id="linkedin" name="linkedin" class="form-input"
+                      placeholder="https://linkedin.com/in/..." value="<%= editing || member ? member.linkedin : '' %>"
+                      required>
+                  </div>
+
+                  <!-- Image -->
+                  <div>
+                    <label for="image" class="form-label">Profile Image</label>
+                    <input type="file" id="image" name="image"
+                      class="form-input text-sm text-text-muted file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                      <%=!editing ? 'required' : '' %>>
+                    <% if (editing && member && member.image) { %>
+                      <p class="text-xs text-text-muted mt-2">Leave empty to keep existing image.</p>
+                      <% } %>
+                  </div>
+
+                  <% if (editing) { %>
+                    <input type="hidden" name="memberId" value="<%= member._id %>">
+                    <% } %>
+
+                      <div class="pt-4 flex gap-4">
+                        <a href="/admin/team"
+                          class="flex-1 py-3 px-6 rounded-lg border border-white/10 text-center font-bold text-text-muted hover:bg-white/5 transition-colors uppercase text-sm">Cancel</a>
+                        <button type="submit" class="flex-1 btn-cyber py-3 px-6 rounded-lg font-bold uppercase text-sm">
+                          <%= editing ? 'Update Member' : 'Add Member' %>
+                        </button>
+                      </div>
+                </form>
+          </div>
+        </div>
+      </main>
+
+      <%- include('../partials/footer.ejs') %>
+  </div>
+  <script src="/js/home.js"></script>
+</body>
+
+</html>

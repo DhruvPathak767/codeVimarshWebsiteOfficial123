@@ -1,0 +1,125 @@
+<footer id="contact" class="border-t border-white/5 mt-20 relative overflow-hidden bg-bg-secondary/30 backdrop-blur-md">
+    <!-- Grid Background for Footer -->
+    <div class="absolute inset-0 pattern-grid-lg opacity-[0.03] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <!-- Brand -->
+            <div>
+                <a href="<% if (isAdmin) { %>/admin<% } else { %>/<% }%>" class="flex items-center mb-4 group cursor-pointer inline-block">
+                    <img src="/images/logo.svg" alt="Code Vimarsh Logo"
+                        class="h-8 w-auto transition-transform duration-300 transform hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(var(--color-primary),0.6)]">
+                </a>
+                <p class="text-text-muted text-sm leading-relaxed max-w-xs">
+                    Empowering developers through collaboration, innovation, and continuous learning.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-white font-display font-bold mb-6 tracking-wide uppercase text-sm">Quick Access</h3>
+                <ul class="space-y-3 ">
+                   
+                    <% if (!typeof isAdmin !=='undefined' && !isAdmin) { %>
+                         <li><a href="/"
+                            class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                            Home</a>
+                    </li>
+                    <li><a href="/about"
+                            class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                            About</a>
+                    </li>
+                        <li><a href="/events"
+                                class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                Events</a></li>
+                        <li><a href="/team"
+                                class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                Team</a></li>
+                        <li><a href="/resources"
+                                class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                Resources</a></li>
+                        <% } else if (typeof isAdmin !=='undefined' && isAdmin) { %>
+                            <li><a href="/admin/events"
+                                    class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                    Manage Events</a></li>
+                            <li><a href="/admin/team"
+                                    class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                    Manage Team</a></li>
+                            <li><a href="/admin/resources"
+                                    class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                    Manage Resources</a></li>
+                            <% } else { %>
+                                <!-- Fallback for non-logged in or basic view if isAdmin is undefined, likely guest -->
+                                <li><a href="/events"
+                                        class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                        Events</a></li>
+                                <li><a href="/team"
+                                        class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                        Team</a></li>
+                                <li><a href="/resources"
+                                        class="text-text-muted hover:text-primary text-sm transition-colors hover:pl-2 block font-code">>>
+                                        Resources</a></li>
+                                <% } %>
+
+                </ul>
+            </div>
+
+            <!-- Contact & Socials -->
+            <div>
+                <h3 class="text-white font-display font-bold mb-6 tracking-wide uppercase text-sm">Establish Connection
+                </h3>
+                <ul class="space-y-4 mb-6">
+                    <li
+                        class="flex items-start space-x-3 text-text-muted text-sm hover:text-white transition-colors cursor-default group">
+                        <span class="text-primary mt-0.5">@</span>
+                        <a href="mailto:contact@codevimarsh.com"
+                            class="font-code group-hover:text-primary transition-colors">contact@codevimarsh.com</a>
+                    </li>
+                </ul>
+
+                <h3 class="text-white font-display font-bold mb-4 tracking-wide uppercase text-sm">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/codevimarsh/"
+                        class="text-text-muted hover:text-primary transition-colors transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-instagram">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/codevimarsh"
+                        class="text-text-muted hover:text-primary transition-colors transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-facebook">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/company/codevimarsh"
+                        class="text-text-muted hover:text-primary transition-colors transform hover:-translate-y-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-linkedin">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-white/5 pt-8 text-center">
+            <p class="text-text-muted text-xs font-code tracking-wider">
+                © 2024 CODE VIMARSH. ALL RIGHTS RESERVED. // SYSTEM ONLINE
+            </p>
+        </div>
+    </div>
+</footer>

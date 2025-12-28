@@ -1,0 +1,302 @@
+/* ============================================
+   TEAM PAGE SPECIFIC STYLES
+   Member cards with enhanced interactions
+   ============================================ */
+
+/* Team Page Container */
+.team-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Team Section Heading */
+.team-section-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(148, 163, 184, 0.9);
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease-out backwards;
+}
+
+/* Team Grid */
+.team-grid {
+  display: grid;
+  gap: 2rem;
+  animation: fadeUp 0.6s ease-out 0.2s backwards;
+}
+
+.team-grid-initiators {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.team-grid-members {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Member Card Enhanced */
+.member-card {
+  position: relative;
+  background: rgba(15, 5, 41, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeUp 0.6s ease-out backwards;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stagger animation */
+.member-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.member-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.member-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.member-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.member-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.member-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.member-card:nth-child(7) {
+  animation-delay: 0.7s;
+}
+
+.member-card:nth-child(8) {
+  animation-delay: 0.8s;
+}
+
+.member-card:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(0, 240, 255, 0.15);
+  transform: translateY(-10px);
+}
+
+/* Member Image Container */
+.member-image-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: #000;
+}
+
+.member-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(0.3);
+}
+
+.member-card:hover .member-image {
+  transform: scale(1.1);
+  filter: grayscale(0);
+}
+
+/* Member Position Badge */
+.member-position-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary, #00F0FF);
+  animation: fadeIn 0.4s ease-out 0.3s backwards;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Member Info Section */
+.member-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Member Name */
+.member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.member-card:hover .member-name {
+  color: var(--primary, #00F0FF);
+}
+
+/* Member Role */
+.member-role {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary, #00F0FF);
+  margin-bottom: 1rem;
+}
+
+/* Member Bio (if added) */
+.member-bio {
+  font-size: 0.875rem;
+  color: rgba(148, 163, 184, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+/* Social Links */
+.member-social {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.member-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solidrgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgba(148, 163, 184, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.member-social-link:hover {
+  background: var(--primary, #00F0FF);
+  border-color: var(--primary, #00F0FF);
+  color: #000;
+  transform: translateY(-3px) rotate(10deg);
+  box-shadow: 0 5px 15px rgba(0, 240, 255, 0.4);
+}
+
+.member-social-link svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* LinkedIn Icon Animation */
+@keyframes linkedinPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 240, 255, 0);
+  }
+}
+
+.member-social-link:hover {
+  animation: linkedinPulse 1.5s ease-in-out;
+}
+
+/* Team Empty State */
+.team-empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(15, 5, 41, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.team-empty-state p {
+  font-size: 1.125rem;
+  color: rgba(148, 163, 184, 0.8);
+}
+
+/* Gradient Overlay on Image */
+.member-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.member-card:hover .member-image-overlay {
+  opacity: 1;
+}
+
+/* Shimmer Effect on Hover */
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(0, 240, 255, 0.1),
+      transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.member-card:hover::before {
+  left: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .team-grid-initiators,
+  .team-grid-members {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .member-image-container {
+    height: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .team-grid-initiators,
+  .team-grid-members {
+    grid-template-columns: 1fr;
+  }
+
+  .member-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
